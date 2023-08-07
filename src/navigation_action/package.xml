@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>navigation_action</name>
+  <version>0.0.0</version>
+  <description>ROS 2 rclpy example package for the  action</description>
+  <maintainer email="huasheng_zyh@163.com">kint</maintainer>
+  <license>Apache 2.0</license>
+  <author email="huasheng_zyh@163.com">kint</author>
+
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>navigation_action_msg</depend>
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
