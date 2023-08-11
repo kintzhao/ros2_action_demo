@@ -1,4 +1,3 @@
-
 ros action相关package创建流程与注意点
 
 1. ament_python与ament_cmake编译方式的不同
@@ -43,6 +42,7 @@ ros action相关package创建流程与注意点
    ```
 2. setup.cfg  与setup.py
    setup.cfg 注意包名称
+
    ```
 
    [develop]
@@ -54,8 +54,10 @@ ros action相关package创建流程与注意点
 
 
    ```
+
    setup.py 注意包名称， 文件路径 和python文件的执行点entry_points
    python文件与ros执行程序的配置
+
    ```
     #!/usr/bin/env python3
 
@@ -96,15 +98,13 @@ ros action相关package创建流程与注意点
         tests_require=['pytest'],
         entry_points={
             'console_scripts': [
-                'action_client = scripts.action_client:main',
-                'action_server = scripts.action_server:main',                        
+                'action_client = script.action_client:main',
+                'action_server = script.action_server:main',            
             ],
         },
     )
    ```
-
-
-3. 文件夹下面加入 __init__.py 空文件
+3. 文件夹下面加入 ____init____.py 空文件
 4. launch文件与参数文件配置
 
 ```
@@ -208,11 +208,9 @@ ros action相关package创建流程与注意点
 
 ```
 
-
-
 5. 带参数项的launch程序配置参数解析
 
- 注意sys.argv具体包含的参数， 正常ros2 run topic_service_action_rclpy_example checker -g 50 
+ 注意sys.argv具体包含的参数， 正常ros2 run topic_service_action_rclpy_example checker -g 50
 
  换roslaunch的方式会带有（--ros-args -r）等更多的参数， 通过argv=sys.argv[1:3]限制
  checker --goal_total_sum 50 --ros-args -r __node:=checker --params-file /home/robot/ros2_ws/action_demo_ws/install
@@ -261,20 +259,5 @@ if __name__ == '__main__':
 
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 参考https://github.com/robotpilot/ros2-seminar-examples.git

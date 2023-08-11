@@ -37,8 +37,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'action_client = scripts.action_client:main',
-            'action_server = scripts.action_server:main',                        
+            'action_client = script.action_client:main',
+            'action_client2 = script.action_client2:main',            
+            'action_server = script.action_server:main',                        
         ],
     },
 )

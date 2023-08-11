@@ -3,6 +3,7 @@ from rclpy.action import ActionClient
 from rclpy.node import Node
 import sys
 from navigation_action_msg.action import CarNavigate
+from geometry_msgs.msg import Point
 import time
 from rclpy.executors import MultiThreadedExecutor
 
@@ -13,6 +14,13 @@ class carFollowingClient(Node):
         self._action_client = ActionClient(self, CarNavigate, 'car_navigation_action')
         self.goals = []  # Initialize an empty goal list
         self.is_running_goal = False;
+        self.subscription = self.create_subscription( Point, '/add_goal', self.add_goal_callback, 10)
+
+    def add_goal_callback(self, msg):
+        """Callback for received goal points."""
+        self.get_logger().info(f"add_goal_callback, left:{len(self.goals)}")
+        self.goals.append((msg.x, msg.y))
+        self.get_logger().info(f"add_goal_callback, left:{len(self.goals)} point: {msg.x}, {msg.y}")
 
     def add_goal(self, x, y):
         self.goals.append((x, y))
@@ -64,10 +72,14 @@ def main(args=None):
     rclpy.init(args=args)
 
     action_client = carFollowingClient()
+    num = (int)((len(sys.argv)-1)/2)
+    print("input goal num:", num)
+    for i in range(num):
+        action_client.add_goal(float(sys.argv[1+2*i]), float(sys.argv[1+2*i+1]))
     # Add multiple goals
-    action_client.add_goal(1.0, 1.0)
-    action_client.add_goal(1.0, 2.0)
-    action_client.add_goal(2.0, 1.0)
+    # action_client.add_goal(1.0, 1.0)
+    # action_client.add_goal(1.0, 2.0)
+    # action_client.add_goal(2.0, 1.0)
     # action_client.send_goal(float(sys.argv[1]), float(sys.argv[2]))
     has_goal= True
     while rclpy.ok :# and has_goal:
