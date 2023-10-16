@@ -99,7 +99,7 @@ ros action相关package创建流程与注意点
         entry_points={
             'console_scripts': [
                 'action_client = script.action_client:main',
-                'action_server = script.action_server:main',            
+                'action_server = script.action_server:main',          
             ],
         },
     )
@@ -261,3 +261,8 @@ if __name__ == '__main__':
 ```
 
 参考https://github.com/robotpilot/ros2-seminar-examples.git
+
+
+6. `rosidl_target_interfaces`
+
+`rosidl_target_interfaces`是一个CMake宏，其主要目的是为指定的目标（在这个例子中是 `talker`）链接与消息、服务或操作相关的头文件和其他必需资源。
